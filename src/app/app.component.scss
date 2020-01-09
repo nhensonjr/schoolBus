@@ -1,0 +1,108 @@
+// HEADER SECTION //
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  align-items: center;
+  width: 100vw;
+  height: 5vh;
+  background-color: green;
+  div {
+    margin: 0 8px;
+  }
+}
+
+.header-buttons {
+  display: flex;
+}
+
+.settings {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+// BODY SECTION //
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 90vh;
+}
+
+.image-slider {
+  position:relative;
+  display: inline-block;
+  line-height: 0;
+}
+.image-slider img {
+  user-select: none;
+  max-width: 75vw;
+}
+.image-slider > .fill {
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 0%;
+  max-width: 100%;
+  overflow: hidden;
+  resize: none;
+}
+.image-slider > div:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  resize: none;
+}
+
+.add-money-container {
+  display: flex;
+}
+
+.add-money-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px
+}
+
+// FOOTER SECTION //
+
+.footer {
+  align-self: flex-end;
+  display: flex;
+  color: #fff;
+  align-items: center;
+  width: 100vw;
+  height: 5vh;
+  background-color: green;
+}
+
+
+// MODAL SECTION //
+
+.modal {
+  height: 33.3vh;
+  width: 66.6vw;
+  padding: 0 !important;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5vh;
+  width: 100%;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
