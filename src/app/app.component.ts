@@ -24,9 +24,9 @@ import {FormControl} from '@angular/forms';
 
       <div class="image-slider">
         <div class="fill" [style.width.%]="percentageSaved">
-          <img src="../assets/filledBus.png"/>
+          <img src="../assets/color_bus.png"/>
         </div>
-        <img src="../assets/emptyBus.png"/>
+        <img src="../assets/white_bus.png"/>
       </div>
 
       <div class="add-money-container">
