@@ -27,9 +27,15 @@
 .body {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
   height: 90vh;
+}
+
+.saving-target {
+  display: flex;
+  h1 {
+    margin: 8px;
+  }
 }
 
 .image-slider {
@@ -39,7 +45,7 @@
 }
 .image-slider img {
   user-select: none;
-  max-width: 75vw;
+  max-width: 95vw;
 }
 .image-slider > .fill {
   position: absolute;
@@ -61,6 +67,7 @@
 
 .add-money-container {
   display: flex;
+  margin: 16px;
 }
 
 .add-money-button {
@@ -96,6 +103,14 @@
   align-items: center;
   justify-content: space-between;
   height: 5vh;
+  width: 100%;
+}
+
+.modal-content {
+  display: flex;
+}
+
+.savings-goal-input {
   width: 100%;
 }
 
