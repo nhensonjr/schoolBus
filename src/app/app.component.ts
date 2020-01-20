@@ -86,9 +86,15 @@ export class AppComponent implements OnInit {
       console.log('Yikes! That isn\'t a number friend.');
       this.fundsToAdd.setValue(null);
     } else {
-      console.log('Keep saving that cheddar!');
-      this.currentState.totalSaved += +this.fundsToAdd.value;
-      this.backendService.updateState(this.currentState);
+      const totalSaved = this.currentState.totalSaved += +this.fundsToAdd.value;
+      if (totalSaved >= 0) {
+        console.log('Keep saving that cheddar!');
+        this.backendService.updateState(this.currentState);
+      } else {
+        console.log('Had to zero that out for ya.');
+        this.currentState.totalSaved = 0;
+        this.backendService.updateState(this.currentState);
+      }
       this.fundsToAdd.setValue(null);
     }
   }
@@ -99,8 +105,15 @@ export class AppComponent implements OnInit {
       this.goalToSet.setValue(null);
     } else {
       console.log('Keep saving that cheddar!');
-      this.currentState.savingsGoal = +this.goalToSet.value;
-      this.backendService.updateState(this.currentState);
+      const savingsGoal = this.currentState.savingsGoal = +this.goalToSet.value;
+      if (savingsGoal >= 0) {
+        console.log('Sweet goal bro!');
+        this.backendService.updateState(this.currentState);
+      } else {
+        console.log('Had to zero that out for ya.');
+        this.currentState.savingsGoal = 0;
+        this.backendService.updateState(this.currentState);
+      }
       this.goalToSet.setValue(null);
       this.toggleSettings();
     }
