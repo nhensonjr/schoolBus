@@ -17,8 +17,7 @@
   display: flex;
 }
 
-.settings {
-  font-size: 24px;
+.cursor {
   cursor: pointer;
 }
 
@@ -40,22 +39,27 @@
 }
 
 .image-slider {
-  position:relative;
+  position: relative;
   display: inline-block;
   line-height: 0;
 }
+
 .image-slider img {
   user-select: none;
   max-width: 70vw;
 }
+
 .image-slider > .fill {
   position: absolute;
-  top: 0; bottom: 0; left: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
   width: 0%;
   max-width: 100%;
   overflow: hidden;
   resize: none;
 }
+
 .image-slider > div:before {
   content: '';
   display: block;
@@ -68,28 +72,32 @@
 
 .add-money-container {
   display: flex;
+  flex-direction: column;
   margin: 16px;
+  align-items: center;
+}
+
+.funds-to-add-input {
+  width: 40vw;
 }
 
 .add-money-button {
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+}
+
+.add-money-input {
+  display: flex;
+}
+
+.add-money-helper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 200px
+  font-size: x-small;
+  margin: 8px;
+  width: 50%;
 }
-
-// FOOTER SECTION //
-
-.footer {
-  align-self: flex-end;
-  display: flex;
-  color: #fff;
-  align-items: center;
-  width: 100vw;
-  height: 5vh;
-  background-color: green;
-}
-
 
 // MODAL SECTION //
 
@@ -109,10 +117,32 @@
 
 .modal-content {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .savings-goal-input {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px;
   width: 100%;
+  input {
+    width: 100%;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px;
+}
+
+.center-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
 }
 
 .show {

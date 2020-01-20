@@ -9,15 +9,13 @@ import {BackendService} from './backend.service';
     <div class="header">
       <div><h1>{{title}}</h1></div>
       <div class="header-buttons">
-        <div>
-          <i (click)="toggleSettings()" class="fa fa-gears settings"></i>
-        </div>
+        <i (click)="toggleSettings()" class="w3-xlarge fa fa-cog cursor"></i>
       </div>
     </div>
 
     <div class="body">
       <div *ngIf="currentState" class="saving-target">
-        <h1>Goal: {{currentState.totalSaved}}/{{"$" + currentState.savingsGoal}}</h1>
+        <h1>Goal: \${{currentState.totalSaved}}/\${{currentState.savingsGoal}}</h1>
       </div>
 
       <div class="image-slider">
@@ -28,22 +26,33 @@ import {BackendService} from './backend.service';
       </div>
 
       <div class="add-money-container">
-        <div (click)="updateTotalSaved()" class="w3-green w3-hover-grey w3-margin-right add-money-button">ADD MONEY</div>
-        <input class="w3-input" type="text" [formControl]="fundsToAdd" placeholder="enter amount here">
+        <div class="w3-container modal-content">
+          <div class="center"><i class="w3-xlarge fa fa-dollar w3-text-green"></i></div>
+          <div class="funds-to-add-input center-input">
+            <input class="w3-input w3-border" type="text" [formControl]="fundsToAdd" placeholder="$0.00">
+          </div>
+          <div (click)="updateTotalSaved()" class="center"><i class="w3-xlarge fa fa-check-square w3-hover-text-green"></i></div>
+        </div>
       </div>
 
       <div [ngClass]="showSettings ? 'w3-modal show' : 'hide'">
         <div class="w3-modal-content w3-card-4">
           <header class="modal-header w3-green">
             <div class="w3-container"><h3>Settings</h3></div>
-            <div (click)="toggleSettings()" class="w3-container settings">X</div>
+            <div (click)="toggleSettings()" class="w3-container cursor">X</div>
           </header>
           <div class="w3-container modal-content">
-            <div class="w3-margin"><i class="w3-xxlarge fa fa-dollar"></i></div>
-            <div class="w3-margin savings-goal-input">
-              <input class="w3-input w3-border" type="text" [formControl]="goalToSet" placeholder="Savings Goal">
+            <div class="savings-goal-input">
+              <div class="center">
+                <i class="w3-xlarge fa fa-dollar w3-text-green"></i>
+              </div>
+              <div class="center-input">
+                <input class="w3-input w3-border" type="text" [formControl]="goalToSet" placeholder="Savings Goal">
+              </div>
+              <div (click)="updateSavingsGoal()" class="center">
+                <i class="w3-xlarge fa fa-check-square w3-hover-text-green"></i>
+              </div>
             </div>
-            <div (click)="updateSavingsGoal()" class="w3-margin"><i class="w3-xxlarge fa fa-check-square w3-hover-text-green"></i></div>
           </div>
         </div>
       </div>
@@ -56,7 +65,6 @@ export class AppComponent implements OnInit {
   fundsToAdd = new FormControl();
   goalToSet = new FormControl();
   showSettings = false;
-  addMoney = false;
   currentState: AppState;
 
   constructor(private backendService: BackendService) {
@@ -75,10 +83,6 @@ export class AppComponent implements OnInit {
 
   toggleSettings() {
     this.showSettings = !this.showSettings;
-  }
-
-  toggleAddMoney() {
-    this.addMoney = !this.addMoney;
   }
 
   updateTotalSaved() {
