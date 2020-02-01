@@ -99,9 +99,8 @@ export class AppComponent implements OnInit {
     return transaction.split('|')[0];
   }
 
-  getDateFromTransaction(transaction: string) {
-    const transactionDate = transaction.split('|')[1];
-    return new Date(transactionDate).toDateString();
+  getDateFromTransaction(transaction: string): string {
+    return transaction.split('|')[1];
   }
 
   toggleSettings() {
@@ -148,6 +147,6 @@ export class AppComponent implements OnInit {
   }
 
   createTransaction(): string {
-    return this.fundsToAdd.value.toString() + '|' + new Date().toJSON();
+    return this.fundsToAdd.value.toString() + '|' + new Date().toDateString();
   }
 }
