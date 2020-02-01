@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {AppState} from './app-state.model';
+import {AppState} from './models/app-state.model';
 import {BackendService} from './backend.service';
 
 @Component({
@@ -31,7 +31,9 @@ import {BackendService} from './backend.service';
           <div class="funds-to-add-input center-input">
             <input class="w3-input w3-border" type="text" [formControl]="fundsToAdd" placeholder="$0.00">
           </div>
-          <div (click)="updateTotalSaved()" class="center"><i class="w3-xlarge fa fa-check-square w3-hover-text-green"></i></div>
+          <div (click)="updateTotalSaved()" class="center">
+            <i class="w3-xlarge fa fa-check-square w3-hover-text-green"></i>
+          </div>
         </div>
       </div>
 
@@ -41,7 +43,7 @@ import {BackendService} from './backend.service';
             <div class="w3-container"><h3>Settings</h3></div>
             <div (click)="toggleSettings()" class="w3-container cursor">X</div>
           </header>
-          <div class="w3-container modal-content">
+          <div class="w3-container modal-content content-section">
             <div class="savings-goal-input">
               <div class="center">
                 <i class="w3-xlarge fa fa-dollar w3-text-green"></i>
@@ -52,6 +54,18 @@ import {BackendService} from './backend.service';
               <div (click)="updateSavingsGoal()" class="center">
                 <i class="w3-xlarge fa fa-check-square w3-hover-text-green"></i>
               </div>
+            </div>
+            <div class="transactions table-height" *ngIf="currentState">
+              <table>
+                <tr>
+                  <th>Amount</th>
+                  <th>Date</th>
+                </tr>
+                <tr *ngFor="let tran of currentState.transactions">
+                  <td>{{getAmountFromTransaction(tran)}}</td>
+                  <td>{{getDateFromTransaction(tran)}}</td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
@@ -81,6 +95,15 @@ export class AppComponent implements OnInit {
     return this.currentState ? ((this.currentState.totalSaved / this.currentState.savingsGoal) * 100) : 0;
   }
 
+  getAmountFromTransaction(transaction: string): string {
+    return transaction.split('|')[0];
+  }
+
+  getDateFromTransaction(transaction: string) {
+    const transactionDate = transaction.split('|')[1];
+    return new Date(transactionDate).toDateString();
+  }
+
   toggleSettings() {
     this.showSettings = !this.showSettings;
   }
@@ -91,6 +114,7 @@ export class AppComponent implements OnInit {
       this.fundsToAdd.setValue(null);
     } else {
       const totalSaved = this.currentState.totalSaved += +this.fundsToAdd.value;
+      this.currentState.transactions.push(this.createTransaction());
       if (totalSaved >= 0) {
         console.log('Keep saving that cheddar!');
         this.backendService.updateState(this.currentState);
@@ -121,5 +145,9 @@ export class AppComponent implements OnInit {
       this.goalToSet.setValue(null);
       this.toggleSettings();
     }
+  }
+
+  createTransaction(): string {
+    return this.fundsToAdd.value.toString() + '|' + new Date().toJSON();
   }
 }

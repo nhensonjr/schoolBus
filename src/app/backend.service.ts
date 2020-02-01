@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {AppState} from './app-state.model';
+import {AppState} from './models/app-state.model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -19,7 +19,8 @@ export class BackendService {
     this.db.collection('appState').doc('currentState').update(
       {
         savingsGoal: newState.savingsGoal,
-        totalSaved: newState.totalSaved
+        totalSaved: newState.totalSaved,
+        transactions: newState.transactions
       }
     );
   }
